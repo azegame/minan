@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('choices', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('questionnaire_id');
+            $table->string('name');
             $table->timestamps();
+
+            $table->foreign('questionnaire_id')->references('id')->on('questionnaires');
         });
     }
 
