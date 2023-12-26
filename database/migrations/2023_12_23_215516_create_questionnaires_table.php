@@ -12,10 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('questionnaires', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // ユニークなID
+            $table->unsignedBigInteger('user_id'); // アンケート作成者のUserID
+            $table->string('name'); // アンケート名
+            $table->boolean('public_flag'); // 公開設定フラグ
+            $table->timestamps(); // 作成日と更新日
+
+            // ユーザーテーブルとの外部キー制約
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
+
 
     /**
      * Reverse the migrations.
