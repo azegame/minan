@@ -22,6 +22,6 @@
             @endauth
         </div>
         @endif
-        <a href="{{ route('/questionnaires/create') }}">アンケートを作成する</a>
+        <a href="{{ route('questionnaires.create') }}">アンケートを作成する</a>
 
 </html>
