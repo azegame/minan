@@ -10,4 +10,9 @@ class QuestionnaireController extends Controller
     {
         return view('index');
     }
+
+    public function create()
+    {
+        return view('questionnaires.create');
+    }
 }

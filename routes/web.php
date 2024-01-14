@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::get('/', [QuestionnaireController::class, 'index'])->name('index');
+Route::get('/questionnaires/create', [QuestionnaireController::class, 'create'])->name('questionnaires.create');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
