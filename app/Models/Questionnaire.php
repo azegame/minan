@@ -11,7 +11,7 @@ class Questionnaire extends Model
 
     protected $fillable = [
         'user_id',
-        'questionnaires_name',
+        'questionnaire_name',
         'public_flag',
     ];
 }

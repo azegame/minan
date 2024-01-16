@@ -24,7 +24,7 @@ class QuestionnaireController extends Controller
         //dd($request);
         Questionnaire::create([
             'user_id' => Auth::id(),
-            'questionnaires_name' => $request->questionnaires_name,
+            'questionnaire_name' => $request->questionnaire_name,
             'public_flag' => $request->publish_setting == 'public' ? 1 : 0,
         ]);
 

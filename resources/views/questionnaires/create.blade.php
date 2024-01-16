@@ -17,7 +17,7 @@
                         <div class="p-2 w-full">
                             <div class="relative">
                                 <label for="questionnaires_name" class="leading-7 text-sm text-gray-600">アンケート名</label>
-                                <input type="text" id="questionnaires_name" name="questionnaires_name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                <input type="text" id="questionnaire_name" name="questionnaire_name" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                             </div>
                         </div>
                         <div class="flex items-center space-x-4">
@@ -33,7 +33,10 @@
                                 <span class="ml-2 text-gray-700">非公開</span>
                             </label>
                         </div>
-
+                        <div>
+                            <button button type="button" id="add_opt_btn">選択肢を増やす</button>
+                            <label>選択肢<input type="text"></label>
+                        </div>
                         <div class="p-2 w-full">
                             <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">作成</button>
                         </div>
