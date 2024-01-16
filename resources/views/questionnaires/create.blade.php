@@ -33,16 +33,23 @@
                                 <span class="ml-2 text-gray-700">非公開</span>
                             </label>
                         </div>
+
+                        <div class="p-4 w-full">
+                            <div class="relative">
+                                <label>選択肢<input type="text" class="p-2"></label>
+                            </div>
+                        </div>
                         <div>
                             <button button type="button" id="add_opt_btn">選択肢を増やす</button>
-                            <label>選択肢<input type="text"></label>
-                        </div>
-                        <div class="p-2 w-full">
-                            <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">作成</button>
                         </div>
 
                     </div>
+                    <div class="p-2 w-full">
+                        <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">作成</button>
+                    </div>
+
                 </div>
+            </div>
             </div>
     </section>
 </x-app-layout>

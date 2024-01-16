@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vote_user_id');
-            $table->unsignedBigInteger('choice_id');
+            $table->unsignedBigInteger('option_id');
             $table->timestamp('created_at'); // 初回投票の時刻のみ記録
 
             $table->foreign('vote_user_id')->references('id')->on('users');
-            $table->foreign('choice_id')->references('id')->on('choices');
+            $table->foreign('option_id')->references('id')->on('options');
         });
     }
 
