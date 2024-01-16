@@ -33,15 +33,16 @@
                                 <span class="ml-2 text-gray-700">非公開</span>
                             </label>
                         </div>
-
-                        <div class="p-4 w-full">
-                            <div class="relative">
-                                <label>選択肢<input type="text" class="p-2"></label>
-                            </div>
-                        </div>
+                        <br>
                         <div>
                             <button button type="button" id="add_opt_btn">選択肢を増やす</button>
                         </div>
+                        <div class="p-4 w-full">
+                            <div id="first-choice" class="relative">
+                                <label>選択肢 : <input type="text" name="option_name"></label>
+                            </div>
+                        </div>
+
 
                     </div>
                     <div class="p-2 w-full">

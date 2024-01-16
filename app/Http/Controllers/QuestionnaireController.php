@@ -28,6 +28,13 @@ class QuestionnaireController extends Controller
             'public_flag' => $request->publish_setting == 'public' ? 1 : 0,
         ]);
 
+
+
+        // Options::create([
+        //     'questionnaire_id' => ,
+        //     'option_name' => $request->option_name,
+        // ]);
+
         return to_route('index');
     }
 }
