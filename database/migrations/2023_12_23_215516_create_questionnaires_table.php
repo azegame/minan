@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('questionnaires', function (Blueprint $table) {
             $table->id(); // ユニークなID
-            $table->unsignedBigInteger('user_id'); // アンケート作成者のUserID
-            $table->string('questionnaire_name'); // アンケート名
-            $table->boolean('public_flag'); // 公開設定フラグ
+            $table->unsignedBigInteger('user_id');
+            $table->string('questionnaire_name');
+            $table->boolean('public_flag');
             $table->timestamps(); // 作成日と更新日
 
             // ユーザーテーブルとの外部キー制約
