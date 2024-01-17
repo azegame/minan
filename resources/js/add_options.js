@@ -7,13 +7,22 @@ document.querySelector('#add_opt_btn').addEventListener('click', () => {
     newLabel.textContent = '選択肢 : ';
     newLabel.appendChild(newInput);
 
-    // 新しいdivを作成し、labelを追加
+    // 新しいrelative divを作成し、labelを追加
+    const newRelativeDiv = document.createElement('div');
+    newRelativeDiv.className = 'relative';
+    newRelativeDiv.appendChild(newLabel);
+
+    // 新しいp-4 w-full divを作成し、relative divを追加
     const newDiv = document.createElement('div');
-    newDiv.appendChild(newLabel);
+    newDiv.className = 'p-4 w-full';
+    newDiv.appendChild(newRelativeDiv);
 
-    // IDを使って最初の選択肢のdiv要素を特定
+    // first-choiceの直後に新しいdivを挿入
     const firstChoiceDiv = document.querySelector('#first-choice');
-
-    // firstChoiceDivの直後に新しいdivを挿入
     firstChoiceDiv.parentNode.insertBefore(newDiv, firstChoiceDiv.nextSibling);
 });
+
+
+
+
+
