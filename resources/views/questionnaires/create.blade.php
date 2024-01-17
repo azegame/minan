@@ -39,12 +39,12 @@
                         </div>
                         <div class="p-4 w-full">
                             <div class="relative">
-                                <label>選択肢 : <input type="text" name="option_name"></label>
+                                <label>選択肢 : <input type="text" name="option_name[]"></label>
                             </div>
                         </div>
                         <div id="first-choice" class="p-4 w-full">
                             <div class="relative">
-                                <label>選択肢 : <input type="text" name="option_name"></label>
+                                <label>選択肢 : <input type="text" name="option_name[]"></label>
                             </div>
                         </div>
 

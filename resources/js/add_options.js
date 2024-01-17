@@ -1,7 +1,7 @@
 document.querySelector('#add_opt_btn').addEventListener('click', () => {
     const newInput = document.createElement('input');
     newInput.type = 'text';
-    newInput.name = 'option_name';
+    newInput.name = 'option_name[]';
 
     const newLabel = document.createElement('label');
     newLabel.textContent = '選択肢 : ';
