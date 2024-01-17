@@ -23,5 +23,6 @@
         </div>
         @endif
         <a href="{{ route('questionnaires.create') }}">アンケートを作成する</a>
+        <a href="{{ route('questionnaires.show') }}">アンケート一覧</a>
 
 </html>

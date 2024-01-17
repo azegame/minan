@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Questionnaire;
+use App\Models\Option;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionnaireController extends Controller
@@ -22,18 +23,23 @@ class QuestionnaireController extends Controller
     public function store(Request $request)
     {
         //dd($request);
-        Questionnaire::create([
+        $questionnaire = Questionnaire::create([
             'user_id' => Auth::id(),
             'questionnaire_name' => $request->questionnaire_name,
             'public_flag' => $request->publish_setting == 'public' ? 1 : 0,
         ]);
 
+        $questionnaireId = $questionnaire->id;
 
-
-        // Options::create([
-        //     'questionnaire_id' => ,
-        //     'option_name' => $request->option_name,
-        // ]);
+        $optionNames = $request->input('option_name');
+        foreach ($optionNames as $optionName) {
+            // 選択肢をデータベースに保存
+            Option::create([
+                'questionnaire_id' => $questionnaireId,
+                'option_name' => $optionName,
+            ]);
+        }
+        dd($optionNames);
 
         return to_route('index');
     }
