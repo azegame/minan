@@ -12,7 +12,8 @@ class QuestionnaireController extends Controller
 {
     public function index()
     {
-        return view('index');
+        $questionnaires = Questionnaire::select('id', 'questionnaire_name')->get();
+        return view('index', compact('questionnaires'));
     }
 
     public function create()

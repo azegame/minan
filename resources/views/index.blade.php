@@ -23,6 +23,13 @@
         </div>
         @endif
         <a href="{{ route('questionnaires.create') }}">アンケートを作成する</a>
-        <a href="{{ route('questionnaires.show') }}">アンケート一覧</a>
+        <div>
+            アンケート一覧
+            @foreach($questionnaires as $questionnaire)
+            <div>
+                {{ $questionnaire->questionnaire_name}}
+            </div>
+            @endforeach
+        </div>
 
 </html>
