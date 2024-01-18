@@ -14,4 +14,9 @@ class Questionnaire extends Model
         'questionnaire_name',
         'public_flag',
     ];
+
+    public function options()
+    {
+        return $this->hasMany(Option::class, 'questionnaire_id');
+    }
 }

@@ -28,6 +28,7 @@
             @foreach($questionnaires as $questionnaire)
             <div>
                 {{ $questionnaire->questionnaire_name}}
+                <a href="{{ route('questionnaires.show', $questionnaire->id) }}">投票する</a>
             </div>
             @endforeach
         </div>

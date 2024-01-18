@@ -44,4 +44,12 @@ class QuestionnaireController extends Controller
 
         return to_route('index');
     }
+
+    public function show($id)
+    {
+        $option = Option::find($id);
+        $questionnaire = Questionnaire::find($id);
+        $options = $questionnaire->options;
+        return view('questionnaires.show', compact('options'));
+    }
 }
