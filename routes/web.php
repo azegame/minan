@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::get('/', [QuestionnaireController::class, 'index'])->name('index');
-Route::get('/questionnaires/{id}', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
-//Route::get('/questionnaires', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
 Route::get('/questionnaires/create', [QuestionnaireController::class, 'create'])->middleware(['auth', 'verified'])->name('questionnaires.create');
+//Route::get('/questionnaires/{id}', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
+Route::get('/questionnaires/{id}', [QuestionnaireController::class, 'show'])->where('id', '[0-9]+')->name('questionnaires.show');
 Route::post('/questionnaires', [QuestionnaireController::class, 'store'])->middleware(['auth', 'verified'])->name('questionnaires.store');
 
 

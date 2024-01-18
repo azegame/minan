@@ -16,10 +16,12 @@ class QuestionnaireController extends Controller
         return view('index', compact('questionnaires'));
     }
 
+
     public function create()
     {
         return view('questionnaires.create');
     }
+
 
     public function store(Request $request)
     {
@@ -40,15 +42,17 @@ class QuestionnaireController extends Controller
                 'option_name' => $optionName,
             ]);
         }
-        dd($optionNames);
+        //dd($optionNames);
 
         return to_route('index');
     }
 
+
     public function show($id)
     {
-        $option = Option::find($id);
+        //$option = Option::find($id);
         $questionnaire = Questionnaire::find($id);
+
         $options = $questionnaire->options;
         return view('questionnaires.show', compact('options'));
     }
