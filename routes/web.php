@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/', [QuestionnaireController::class, 'index'])->name('index');
 Route::get('/questionnaires/create', [QuestionnaireController::class, 'create'])->middleware(['auth', 'verified'])->name('questionnaires.create');

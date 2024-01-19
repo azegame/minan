@@ -1,36 +1,26 @@
-<!DOCTYPE html>
-<html lang="ja">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            みんなのアンケート
+        </h2>
+    </x-slot>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>みんなのアンケート</title>
-</head>
-
-<body class="antialiased">
-    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-        @if (Route::has('login'))
-        <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-            @auth
-            <div>{{ Auth::user()->name }}</div>さんのマイページ
-            @else
-            <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
-
-            @if (Route::has('register'))
-            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-            @endif
-            @endauth
-        </div>
-        @endif
-        <a href="{{ route('questionnaires.create') }}">アンケートを作成する</a>
-        <div>
-            アンケート一覧
-            @foreach($questionnaires as $questionnaire)
-            <div>
-                {{ $questionnaire->questionnaire_name}}
-                <a href="{{ route('questionnaires.show', $questionnaire->id) }}">投票する</a>
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-wrap -m-4">
+                @foreach($questionnaires as $questionnaire)
+                <div class="xl:w-1/4 md:w-1/2 p-4">
+                    <div class="bg-gray-100 p-6 rounded-lg">
+                        <img class="h-40 rounded w-full object-cover object-center mb-6" src="https://dummyimage.com/720x400" alt="content">
+                        <h3 class="tracking-widest text-blue-500 text-xs font-medium title-font">
+                            <a href="{{ route('questionnaires.show', $questionnaire->id) }}">投票する</a>
+                        </h3>
+                        <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{ $questionnaire->questionnaire_name}}</h2>
+                    </div>
+                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
-
-</html>
+    </section>
+    <a href="{{ route('questionnaires.create') }}">アンケートを作成する</a>
+</x-app-layout>
