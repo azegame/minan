@@ -29,7 +29,7 @@ class QuestionnaireController extends Controller
         $questionnaire = Questionnaire::create([
             'user_id' => Auth::id(),
             'questionnaire_name' => $request->questionnaire_name,
-            'public_flag' => $request->publish_setting == 'public' ? 1 : 0,
+            'public_flag' => $request->publish_flag == 'public' ? 1 : 0,
         ]);
 
         $questionnaireId = $questionnaire->id;

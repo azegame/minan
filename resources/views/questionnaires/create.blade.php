@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('アンケート作成画面') }}
         </h2>
     </x-slot>
     <section class="text-gray-600 body-font relative">
@@ -9,9 +9,7 @@
             @csrf
             <div class=" container px-5 py-24 mx-auto">
                 <div class="flex flex-col text-center w-full mb-12">
-
                 </div>
-
                 <div class="lg:w-1/2 md:w-2/3 mx-auto">
                     <div class="flex flex-wrap -m-2">
                         <div class="p-2 w-full">
@@ -23,7 +21,7 @@
                         <div class="flex items-center space-x-4">
                             <!-- 公開オプション -->
                             <label class="flex items-center">
-                                <input type="radio" name="publish_setting" value="public" class="form-radio h-5 w-5 text-blue-600" checked>
+                                <input type="radio" name="publish_flag" value="public" class="form-radio h-5 w-5 text-blue-600" checked>
                                 <span class="ml-2 text-gray-700">公開</span>
                             </label>
 
@@ -33,7 +31,6 @@
                                 <span class="ml-2 text-gray-700">非公開</span>
                             </label>
                         </div>
-
                         <div>
                             <button button type="button" id="add_opt_btn">選択肢を増やす</button>
                         </div>
@@ -47,13 +44,10 @@
                                 <label>選択肢 : <input type="text" name="option_name[]"></label>
                             </div>
                         </div>
-
-
                     </div>
                     <div class="p-2 w-full">
                         <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">作成</button>
                     </div>
-
                 </div>
             </div>
             </div>
