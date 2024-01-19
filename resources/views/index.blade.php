@@ -10,7 +10,7 @@
             <div class="flex flex-wrap -m-4">
                 @foreach($questionnaires as $questionnaire)
                 <div class="xl:w-1/4 md:w-1/2 p-4">
-                    <div class="bg-gray-100 p-6 rounded-lg">
+                    <div class="bg-sky-100 p-6 rounded-lg">
                         <img class="h-40 rounded w-full object-cover object-center mb-6" src="https://dummyimage.com/720x400" alt="content">
                         <h3 class="tracking-widest text-blue-500 text-xs font-medium title-font">
                             <a href="{{ route('questionnaires.show', $questionnaire->id) }}">投票する</a>
@@ -22,5 +22,4 @@
             </div>
         </div>
     </section>
-    <a href="{{ route('questionnaires.create') }}">アンケートを作成する</a>
 </x-app-layout>

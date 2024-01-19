@@ -12,7 +12,7 @@ class QuestionnaireController extends Controller
 {
     public function index()
     {
-        $questionnaires = Questionnaire::select('id', 'questionnaire_name')->get();
+        $questionnaires = Questionnaire::select('id', 'questionnaire_name')->where('public_flag', 1)->get();
         return view('index', compact('questionnaires'));
     }
 
