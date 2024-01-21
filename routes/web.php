@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionnaireController;
+use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,8 +24,9 @@ Route::get('/', [QuestionnaireController::class, 'index'])->name('index');
 Route::get('/questionnaires/create', [QuestionnaireController::class, 'create'])->middleware(['auth', 'verified'])->name('questionnaires.create');
 //Route::get('/questionnaires/{id}', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
 Route::get('/questionnaires/{id}', [QuestionnaireController::class, 'show'])->where('id', '[0-9]+')->name('questionnaires.show');
-Route::post('/questionnaires/{id}', [QuestionnaireController::class, 'show'])->where('id', '[0-9]+')->name('questionnaires.show');
 Route::post('/questionnaires', [QuestionnaireController::class, 'store'])->middleware(['auth', 'verified'])->name('questionnaires.store');
+Route::post('/questionnaires/{id}', [VoteController::class, 'vote'])->where('id', '[0-9]+')->name('questionnaires.vote');
+
 
 
 

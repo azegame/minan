@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('questionnaire_id');
             $table->string('option_name');
+            $table->unsignedInteger('vote_count')->default(0);
             $table->timestamps();
 
             $table->foreign('questionnaire_id')->references('id')->on('questionnaires');

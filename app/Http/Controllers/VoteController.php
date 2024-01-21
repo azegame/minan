@@ -4,29 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Option;
+
 class VoteController extends Controller
 {
     public function store(Request $request)
     {
         //dd($request);
-        $questionnaire = Questionnaire::create([
-            'user_id' => Auth::id(),
-            'questionnaire_name' => $request->questionnaire_name,
-            'public_flag' => $request->publish_flag == 'public' ? 1 : 0,
-        ]);
+    }
 
-        $questionnaireId = $questionnaire->id;
+    public function vote(Request $request, $optionId)
+    {
+        // 投票ロジック
+        $option = Option::find($optionId);
+        $option->increment('vote_count');
 
-        $optionNames = $request->input('option_name');
-        foreach ($optionNames as $optionName) {
-            // 選択肢をデータベースに保存
-            Option::create([
-                'questionnaire_id' => $questionnaireId,
-                'option_name' => $optionName,
-            ]);
-        }
-        //dd($optionNames);
-
-        return to_route('index');
+        return response()->json(['newVoteCount' => $option->vote_count]);
     }
 }
