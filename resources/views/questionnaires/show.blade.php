@@ -13,7 +13,7 @@
                         <img alt="content" class="object-cover object-center h-full w-full" src="https://dummyimage.com/1201x501">
                     </div>
                     <h2 class="title-font text-2xl font-medium text-gray-900 mt-6 mb-3">{{ $option->option_name}}</h2>
-                    <p class="leading-relaxed text-base">{{ $option->option_name}}</p>
+                    <p class="leading-relaxed text-base"></p>
                     <button class="flex mx-auto mt-6 text-white bg-blue-500 border-0 py-2 px-5 focus:outline-none hover:bg-blue-600 rounded">投票</button>
                 </div>
                 @endforeach
