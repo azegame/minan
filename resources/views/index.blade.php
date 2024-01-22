@@ -7,6 +7,7 @@
 
     <section class="text-gray-600 body-font">
         <div class="container px-5 py-24 mx-auto">
+            <a href="{{ route('questionnaires.create') }}">アンケートを作成する</a>
             <div class="flex flex-wrap -m-4">
                 @foreach($questionnaires as $questionnaire)
                 <div class="xl:w-1/4 md:w-1/2 p-4">

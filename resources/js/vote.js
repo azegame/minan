@@ -9,9 +9,11 @@ document.querySelectorAll('.vote-button').forEach(button => {
         },
         body: JSON.stringify({ optionId: optionId })
     })
+    // サーバーからのレスポンスをJSON形式に変換
     .then(response => response.json())
+    // dataはアロー関数の引数で、変換されたJSONデータを 'data' として受け取り
     .then(data => {
-        document.getElementById('vote-count-' + optionId).textContent = '投票数: ' + data.newVoteCount;
+        document.getElementById('vote-count-' + optionId).textContent = data.newVoteCount;
     });
 });
 });

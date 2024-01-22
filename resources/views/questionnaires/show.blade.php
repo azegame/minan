@@ -15,8 +15,7 @@
                     <h2 class="title-font text-2xl font-medium text-gray-900 mt-6 mb-3">{{ $option->option_name}}</h2>
                     <p class="leading-relaxed text-base"></p>
                     <button class="vote-button flex mx-auto mt-6 text-white bg-blue-500 border-0 py-2 px-5 focus:outline-none hover:bg-blue-600 rounded"" data-option-id=" {{ $option->id }}">投票</button>
-                    <div id="vote-count-{{ $option->id }}">投票数: 0
-                    </div>
+                    <div>投票数: <span id="vote-count-{{ $option->id }}">{{ $option->vote_count }}</span></div>
                 </div>
                 @endforeach
             </div>
