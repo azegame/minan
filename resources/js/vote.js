@@ -5,15 +5,25 @@ document.querySelectorAll('.vote-button').forEach(button => {
         method: 'POST',
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            // これ大事
+            'X-Requested-With': 'XMLHttpRequest'
         },
         body: JSON.stringify({ optionId: optionId })
     })
     // サーバーからのレスポンスをJSON形式に変換
-    .then(response => response.json())
+    .then(response => {
+        if (response.status === 401) { // 認証エラーの確認
+            window.location.href = '/login';
+        }
+        return response.json();
+    })
     // dataはアロー関数の引数で、変換されたJSONデータを 'data' として受け取る
     .then(data => {
         document.getElementById('vote-count-' + optionId).textContent = data.newVoteCount;
+    })
+    .catch(error => {
+        console.error('エラーが発生しました:', error);
     });
 });
 });

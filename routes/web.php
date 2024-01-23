@@ -25,7 +25,7 @@ Route::get('/questionnaires/create', [QuestionnaireController::class, 'create'])
 //Route::get('/questionnaires/{id}', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
 Route::get('/questionnaires/{id}', [QuestionnaireController::class, 'show'])->where('id', '[0-9]+')->name('questionnaires.show');
 Route::post('/questionnaires', [QuestionnaireController::class, 'store'])->middleware(['auth', 'verified'])->name('questionnaires.store');
-Route::post('/questionnaires/{id}', [VoteController::class, 'vote'])->middleware(['auth', 'verified'])->where('id', '[0-9]+')->name('questionnaires.vote');
+Route::post('/questionnaires/{id}', [VoteController::class, 'vote'])->middleware('ajax.auth')->where('id', '[0-9]+')->name('questionnaires.vote');
 
 
 
