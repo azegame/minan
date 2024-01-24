@@ -16,6 +16,10 @@ document.querySelectorAll('.vote-button').forEach(button => {
         if (response.status === 401) { // 認証エラーの確認
             window.location.href = '/login';
         }
+
+        if (response.status === 409) { // 409 Conflict
+            alert('同じ選択肢に投票できません！');
+        }
         return response.json();
     })
     // dataはアロー関数の引数で、変換されたJSONデータを 'data' として受け取る
