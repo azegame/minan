@@ -29,7 +29,10 @@ class VoteController extends Controller
             // ユニーク制約違反を検出した場合の処理
             // 例: エラーメッセージを返す
             Log::info($e);
-            return response()->json(['error' => '一位制約違反でした。'], 409);
+            $option = Option::find($optionId);
+            $vote_count = $option->vote_count;
+            return response()->json(['error' => '一意制約違反でした。', 'newVoteCount' => $vote_count], 409);
+            //return response()->json(['error' => '一意制約違反でした。'], 409);
         }
     }
 }
