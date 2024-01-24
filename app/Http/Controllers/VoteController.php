@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\Vote;
 use App\Models\Option;
@@ -27,7 +28,8 @@ class VoteController extends Controller
         } catch (QueryException $e) {
             // ユニーク制約違反を検出した場合の処理
             // 例: エラーメッセージを返す
-            return response()->json(['error' => 'You have already voted for this option.'], 409);
+            Log::info($e);
+            return response()->json(['error' => '一位制約違反でした。'], 409);
         }
     }
 }

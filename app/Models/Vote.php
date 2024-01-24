@@ -13,4 +13,6 @@ class Vote extends Model
         'vote_user_id',
         'option_id',
     ];
+
+    const UPDATED_AT = null;
 }
