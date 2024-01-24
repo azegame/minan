@@ -17,9 +17,8 @@ document.querySelector('#add_opt_btn').addEventListener('click', () => {
     newDiv.className = 'p-4 w-full';
     newDiv.appendChild(newRelativeDiv);
 
-    // first-choiceの直後に新しいdivを挿入
-    const firstChoiceDiv = document.querySelector('#first-choice');
-    firstChoiceDiv.parentNode.insertBefore(newDiv, firstChoiceDiv.nextSibling);
+    const parentDiv = document.querySelector('#parentDiv');
+    parentDiv.appendChild(newDiv);
 });
 
 

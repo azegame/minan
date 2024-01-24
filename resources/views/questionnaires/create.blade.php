@@ -11,7 +11,7 @@
                 <div class="flex flex-col text-center w-full mb-12">
                 </div>
                 <div class="lg:w-1/2 md:w-2/3 mx-auto">
-                    <div class="flex flex-wrap -m-2">
+                    <div id="parentDiv" class="flex flex-wrap -m-2">
                         <div class="p-2 w-full">
                             <div class="relative">
                                 <label for="questionnaires_name" class="leading-7 text-sm text-gray-600">アンケート名</label>
@@ -39,7 +39,7 @@
                                 <label>選択肢 : <input type="text" name="option_name[]"></label>
                             </div>
                         </div>
-                        <div id="first-choice" class="p-4 w-full">
+                        <div class="p-4 w-full">
                             <div class="relative">
                                 <label>選択肢 : <input type="text" name="option_name[]"></label>
                             </div>
