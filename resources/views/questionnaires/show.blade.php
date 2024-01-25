@@ -14,10 +14,26 @@
                     </div>
                     <h2 class="title-font text-2xl font-medium text-gray-900 mt-6 mb-3">{{ $option->option_name}}</h2>
                     <p class="leading-relaxed text-base"></p>
-                    <button class="vote-button flex mx-auto mt-6 text-white bg-blue-500 border-0 py-2 px-5 focus:outline-none hover:bg-blue-600 rounded"" data-option-id=" {{ $option->id }}">投票</button>
+
+                    <div class="flex justify-center items-center">
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded-full">
+                            <span>選択</span>
+                        </label>
+                    </div>
+
                     <div>投票数: <span id="vote-count-{{ $option->id }}">{{ $option->vote_count }}</span></div>
                 </div>
                 @endforeach
+            </div>
+        </div>
+        <div class="fixed inset-x-0 bottom-0 px-10 py-4 bg-sky-300 shadow">
+            <div class="flex justify-between">
+                <!-- 投票を終了ボタン -->
+                <a href="{{ route('index') }}" class="flex-1 text-center text-white bg-gray-400 border-0 py-4 px-5 mr-2 focus:outline-none hover:bg-gray-500 rounded-lg">投票を終了</a>
+
+                <!-- 投票ボタン -->
+                <button class="flex-1 text-white bg-teal-500 border-0 py-4 px-5 ml-2 focus:outline-none hover:bg-teal-600 rounded-lg">投票</button>
             </div>
         </div>
     </section>

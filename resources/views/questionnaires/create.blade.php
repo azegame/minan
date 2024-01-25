@@ -27,12 +27,12 @@
 
                             <!-- 非公開オプション -->
                             <label class="flex items-center">
-                                <input type="radio" name="publish_setting" value="private" class="form-radio h-5 w-5 text-blue-600">
+                                <input type="radio" name="publish_flag" value="private" class="form-radio h-5 w-5 text-blue-600">
                                 <span class="ml-2 text-gray-700">非公開</span>
                             </label>
                         </div>
-                        <div>
-                            <button button type="button" id="add_opt_btn">選択肢を増やす</button>
+                        <div class="p-2 w-full">
+                            <button button type="button" id="add_opt_btn" class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">選択肢を増やす</button>
                         </div>
                         <div class="p-4 w-full">
                             <div class="relative">
