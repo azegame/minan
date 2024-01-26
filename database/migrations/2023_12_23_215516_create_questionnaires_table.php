@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('questionnaire_name');
             $table->boolean('public_flag');
+            $table->boolean('vote_flag');
             $table->timestamps(); // 作成日と更新日
 
             // ユーザーテーブルとの外部キー制約

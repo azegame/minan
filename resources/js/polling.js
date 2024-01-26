@@ -6,15 +6,16 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function() {
             checkboxes.forEach(checkbox => {
                 if (checkbox.checked) {
-                    const optionId = checkbox.getAttribute('data-option-id').trim();;
-                    fetch('/questionnaires/' + optionId, {
+                    const optionId = checkbox.getAttribute('data-option-id').trim();
+                    const questionnaireId = button.getAttribute('data-questionnaire-id').trim();
+                    fetch('/questionnaires/' + questionnaireId + '/' + optionId, {
                         method: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                             'Content-Type': 'application/json',
                             'X-Requested-With': 'XMLHttpRequest'
                         },
-                        body: JSON.stringify({ optionId: optionId })
+                        body: JSON.stringify({ questionnaireId: questionnaireId, optionId: optionId })
                     })
                     .then(response => {
                         if (response.status === 401) { // 認証エラー

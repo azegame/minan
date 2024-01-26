@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Questionnaire;
 use App\Models\Option;
+use App\Models\Vote;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionnaireController extends Controller
@@ -29,7 +30,8 @@ class QuestionnaireController extends Controller
         $questionnaire = Questionnaire::create([
             'user_id' => Auth::id(),
             'questionnaire_name' => $request->questionnaire_name,
-            'public_flag' => $request->publish_flag == 'public' ? 1 : 0,
+            'public_flag' => $request->publish_flag == 'public' ? 1 : 0, // mysqlのboolean型は内部的に1, 0
+            'vote_flag' => 1,
         ]);
 
         $questionnaireId = $questionnaire->id;
@@ -54,6 +56,11 @@ class QuestionnaireController extends Controller
         $questionnaire = Questionnaire::find($id);
 
         $options = $questionnaire->options;
-        return view('questionnaires.show', compact('options'));
+        $userId = Auth::id();
+        $voteStatus = Vote::where('questionnaire_id', $questionnaire->id)
+            ->where('vote_user_id', '$userId')
+            ->exists();
+
+        return view('questionnaires.show', compact('questionnaire'), compact('options'));
     }
 }

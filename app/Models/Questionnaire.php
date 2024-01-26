@@ -13,6 +13,7 @@ class Questionnaire extends Model
         'user_id',
         'questionnaire_name',
         'public_flag',
+        'vote_flag',
     ];
 
     public function options()

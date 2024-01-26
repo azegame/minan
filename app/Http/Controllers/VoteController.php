@@ -12,10 +12,11 @@ use App\Models\Option;
 
 class VoteController extends Controller
 {
-    public function vote(Request $request, $optionId)
+    public function vote(Request $request, $questionnaireId, $optionId)
     {
         try {
             Vote::create([
+                'questionnaire_id' => $questionnaireId,
                 'vote_user_id' => Auth::id(),
                 'option_id' => $optionId,
             ]);
@@ -24,7 +25,14 @@ class VoteController extends Controller
             $option = Option::find($optionId);
             $option->increment('vote_count');
 
-            return response()->json(['newVoteCount' => $option->vote_count]);
+            $hasVoted = Vote::where('questionnaire_id', $questionnaireId)
+                ->where('vote_user_id', auth()->id())
+                ->exists();
+
+            return response()->json([
+                'newVoteCount' => $option->vote_count,
+                'hasVoted' => $hasVoted
+            ]);
         } catch (QueryException $e) {
             // ユニーク制約違反を検出した場合の処理
             // 例: エラーメッセージを返す

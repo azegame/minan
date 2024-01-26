@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('questionnaire_id');
             $table->unsignedBigInteger('vote_user_id');
             $table->unsignedBigInteger('option_id');
             $table->timestamp('created_at'); // 初回投票の時刻のみ記録
 
+            $table->foreign('questionnaire_id')->references('id')->on('questionnaires');
             $table->foreign('vote_user_id')->references('id')->on('users');
             $table->foreign('option_id')->references('id')->on('options');
         });
