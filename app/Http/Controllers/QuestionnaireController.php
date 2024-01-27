@@ -52,15 +52,22 @@ class QuestionnaireController extends Controller
 
     public function show($id)
     {
-        //$option = Option::find($id);
         $questionnaire = Questionnaire::find($id);
-
+        // リレーション
         $options = $questionnaire->options;
         $userId = Auth::id();
-        $voteStatus = Vote::where('questionnaire_id', $questionnaire->id)
-            ->where('vote_user_id', '$userId')
+        $hasVoted = Vote::where('questionnaire_id', $questionnaire->id)
+            ->where('vote_user_id', $userId)
             ->exists();
 
-        return view('questionnaires.show', compact('questionnaire'), compact('options'));
+        $selectedOptionId = null;
+        if ($hasVoted) {
+            $vote = Vote::where('questionnaire_id', $questionnaire->id)
+                ->where('vote_user_id', $userId)
+                ->first();
+            $selectedOptionId = $vote->option_id;
+        }
+
+        return view('questionnaires.show', compact('questionnaire', 'options', 'hasVoted', 'selectedOptionId'));
     }
 }

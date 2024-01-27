@@ -17,7 +17,11 @@
 
                     <div class="flex justify-center items-center">
                         <label class="flex items-center space-x-3">
-                            <input type="radio" name="vote_action_btn" data-option-id=" {{ $option->id }}" class="form-checkbox h-5 w-5 text-blue-600 rounded-full">
+                            @if ($option->id == $selectedOptionId)
+                            <input type="radio" checked name="vote_action_btn" data-option-id=" {{ $option->id }} " class="h-5 w-5 text-blue-600 rounded-full">
+                            @else
+                            <input type="radio" name="vote_action_btn" data-option-id=" {{ $option->id }}" class="h-5 w-5 text-blue-600 rounded-full">
+                            @endif
                             <span>選択</span>
                         </label>
                     </div>
@@ -33,7 +37,12 @@
                 <a href="{{ route('index') }}" class="flex-1 text-center text-white bg-gray-600 border-0 py-4 px-5 mr-2 focus:outline-none hover:bg-gray-700 rounded-lg">投票を終了</a>
 
                 <!-- 投票ボタン -->
+                @if ($hasVoted)
+                <button data-questionnaire-id=" {{ $questionnaire->id }}" class="vote-button flex-1 text-white bg-green-200 border-0 py-4 px-5 ml-2 focus:outline-none hover:bg-green-200 rounded-lg" disabled>再投票</button>
+                @else
                 <button data-questionnaire-id=" {{ $questionnaire->id }}" class="vote-button flex-1 text-white bg-green-500 border-0 py-4 px-5 ml-2 focus:outline-none hover:bg-green-600 rounded-lg">投票</button>
+                @endif
+
             </div>
         </div>
     </section>

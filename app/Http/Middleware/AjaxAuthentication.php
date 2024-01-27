@@ -20,9 +20,10 @@ class AjaxAuthentication
             return $next($request);
         } elseif ($request->ajax() || $request->wantsJson()) {
             Log::info('JSON');
-            $option = Option::find($optionId);
-            $vote_count = $option->vote_count;
-            return response()->json(['error' => '認証してね.', 'newVoteCount' => $vote_count], 401);
+            // $option = Option::find($optionId);
+            // $vote_count = $option->vote_count;
+            // return response()->json(['error' => '認証してね.', 'newVoteCount' => $vote_count], 401);
+            return response()->json(['error' => '認証してね.'], 401);
         }
         Log::info('HTML');
         return redirect()->guest('login');

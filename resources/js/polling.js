@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const voteButtons = document.querySelectorAll('.vote-button');
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const voteButton = document.querySelector('.vote-button');
+    const radioBtns = document.querySelectorAll('input[type="radio"]');
 
-    voteButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    const optionId = checkbox.getAttribute('data-option-id').trim();
-                    const questionnaireId = button.getAttribute('data-questionnaire-id').trim();
-                    fetch('/questionnaires/' + questionnaireId + '/' + optionId, {
+        voteButton.addEventListener('click', function() {
+            radioBtns.forEach(radioBtn => {
+                if (radioBtn.checked) {
+                    const questionnaireId = voteButton.getAttribute('data-questionnaire-id').trim();
+                    const optionId = radioBtn.getAttribute('data-option-id').trim();
+                    
+                    fetch('/questionnaires/' + questionnaireId + '/' + optionId,{
                         method: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -22,18 +22,16 @@ document.addEventListener('DOMContentLoaded', function () {
                             window.location.href = '/login';
                             return;
                         } else if (response.status === 409) { // 重複エラー
-                            return response.json().then(data => {
-                                document.getElementById('vote-count-' + optionId).textContent = data.newVoteCount;
+                            return response.json()
+                            .then(data => {
                                 alert('同じ選択肢に投票できません！');
-                                return; // これ以上の処理を防ぐ
+                                return; 
                             });
                         } else {
                             return response.json();
                         }
                     })
-                    // dataはアロー関数の引数で、変換されたJSONデータを 'data' として受け取る
                     .then(data => {
-                        // 成功処理
                         if (data) {
                             document.getElementById('vote-count-' + optionId).textContent = data.newVoteCount;
                         }
@@ -44,5 +42,4 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         });
-    });
 });

@@ -25,22 +25,24 @@ class VoteController extends Controller
             $option = Option::find($optionId);
             $option->increment('vote_count');
 
-            $hasVoted = Vote::where('questionnaire_id', $questionnaireId)
-                ->where('vote_user_id', auth()->id())
-                ->exists();
+            // $hasVoted = Vote::where('questionnaire_id', $questionnaireId)
+            //     ->where('vote_user_id', auth()->id())
+            //     ->exists();
 
             return response()->json([
                 'newVoteCount' => $option->vote_count,
-                'hasVoted' => $hasVoted
             ]);
         } catch (QueryException $e) {
-            // ユニーク制約違反を検出した場合の処理
-            // 例: エラーメッセージを返す
             Log::info($e);
             $option = Option::find($optionId);
             $vote_count = $option->vote_count;
-            return response()->json(['error' => '一意制約違反でした。', 'newVoteCount' => $vote_count], 409);
-            //return response()->json(['error' => '一意制約違反でした。'], 409);
+
+            if ($e->errorInfo[1] == 1062) {
+                return response()->json(['error' => 'すでに投票済みです。', 'newVoteCount' => $vote_count], 409);
+            } else {
+                Log::error($e);
+                return response()->json(['error' => 'データベースエラーが発生しました。', 'newVoteCount' => $vote_count], 500);
+            }
         }
     }
 }
