@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
     const voteButton = document.querySelector('.vote-button');
-    const radioBtns = document.querySelectorAll('input[type="radio"]');
+    const radioBtns = document.querySelectorAll('.switch_btn');
 
         voteButton.addEventListener('click', function() {
             radioBtns.forEach(radioBtn => {
                 if (radioBtn.checked) {
                     const questionnaireId = voteButton.getAttribute('data-questionnaire-id').trim();
                     const optionId = radioBtn.getAttribute('data-option-id').trim();
-                    
+
                     fetch('/questionnaires/' + questionnaireId + '/' + optionId,{
                         method: 'POST',
                         headers: {
