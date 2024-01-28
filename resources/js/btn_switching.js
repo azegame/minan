@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    //const voteButtonStr = document.querySelector('.vote-button').textContent;
+    const voteButton = document.querySelector('.vote-button')
+    const hasVoted = document.body.getAttribute('data-has-voted') 
     const radioBtns = document.querySelectorAll('.switch_btn');
     const optionId = null;
     if (radioBtns.defaultChecked) {
@@ -8,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     radioBtns.forEach(radioBtn => {
         radioBtn.addEventListener('change', function() {
-            updateButtonState(!$hasVoted);
+            updateButtonState(!hasVoted);
             const optionId = radioBtn.getAttribute('data-option-id').trim();
         });
     });
