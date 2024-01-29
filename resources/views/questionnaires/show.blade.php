@@ -38,9 +38,11 @@
 
                 <!-- 投票ボタン -->
                 @if ($hasVoted)
-                <button data-questionnaire-id=" {{ $questionnaire->id }}" data-has-voted="true" class="vote-button-inactive flex-1 text-white bg-green-200 border-0 py-4 px-5 ml-2 focus:outline-none hover:bg-green-200 rounded-lg" disabled>再投票</button>
+                <button data-questionnaire-id=" {{ $questionnaire->id }}" data-has-voted="true" class="vote-button flex-1 text-white bg-green-200 border-0 py-4 px-5 ml-2 focus:outline-none hover:bg-green-200 rounded-lg" disabled>再投票</button>
+                <!-- <button data-questionnaire-id=" {{ $questionnaire->id }}" class="vote-button flex-1 text-white bg-green-200 border-0 py-4 px-5 ml-2 focus:outline-none hover:bg-green-200 rounded-lg" disabled>再投票</button> -->
                 @else
-                <button data-questionnaire-id=" {{ $questionnaire->id }}" data-has-voted="false" class="vote-button-active flex-1 text-white bg-green-500 border-0 py-4 px-5 ml-2 focus:outline-none hover:bg-green-600 rounded-lg">投票</button>
+                <button data-questionnaire-id=" {{ $questionnaire->id }}" data-has-voted="false" class="vote-button flex-1 text-white bg-green-500 border-0 py-4 px-5 ml-2 focus:outline-none hover:bg-green-600 rounded-lg">投票</button>
+                <!-- <button data-questionnaire-id=" {{ $questionnaire->id }}" class="vote-button flex-1 text-white bg-green-500 border-0 py-4 px-5 ml-2 focus:outline-none hover:bg-green-600 rounded-lg">投票</button> -->
                 @endif
 
             </div>
