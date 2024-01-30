@@ -33,7 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     })
                     .then(data => {
                         if (data) {
+                            // document.querySelector('.vote-button').textContent = '再投票'
                             document.getElementById('vote-count-' + optionId).textContent = data.newVoteCount;
+                            
                         }
                     })
                     .catch(error => {
