@@ -18,9 +18,9 @@
                     <div class="flex justify-center items-center">
                         <label class="flex items-center space-x-3">
                             @if ($option->id == $selectedOptionId)
-                            <input type="radio" checked name="vote_action_btn" data-option-id=" {{ $option->id }} " class="switch_btn h-5 w-5 text-blue-600 rounded-full">
+                            <input type="checkbox" checked name="vote_action_btn" data-option-id=" {{ $option->id }} " class="switch_btn h-5 w-5 text-blue-600 rounded-full">
                             @else
-                            <input type="radio" name="vote_action_btn" data-option-id=" {{ $option->id }}" class="switch_btn h-5 w-5 text-blue-600 rounded-full">
+                            <input type="checkbox" name="vote_action_btn" data-option-id=" {{ $option->id }}" class="switch_btn h-5 w-5 text-blue-600 rounded-full">
                             @endif
                             <span>選択</span>
                         </label>
