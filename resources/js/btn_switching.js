@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // 現在投票している選択肢を保存
             if (chkBtn.checked) {
                 previousOptionId = chkBtn.getAttribute('data-option-id').trim();
+                console.log(previousOptionId);
             }
          });
          chkBtns.forEach(chkBtn => {
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 今から投票しようとしている選択肢を保存
                 if (chkBtn.checked) {
                     let currentOptionId = chkBtn.getAttribute('data-option-id').trim();
+                    console.log(currentOptionId);
                     if (currentOptionId === previousOptionId) {
                         disabled(voteButton);
                     } else {
@@ -27,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         // 未投票の場合
     } else {
+        disabled(voteButton);
         chkBtns.forEach(chkBtn => {
             chkBtn.addEventListener('change', () => {
                 if (chkBtn.checked) {

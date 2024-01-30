@@ -33,9 +33,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     })
                     .then(data => {
                         if (data) {
-                            // document.querySelector('.vote-button').textContent = '再投票'
+                            voteButton.setAttribute('data-has-voted', 'true');
+                            voteButton.textContent = '再投票'
+                            voteButton.disabled = true;
+                            voteButton.classList.remove('bg-green-500', 'hover:bg-green-600');
+                            voteButton.classList.add('bg-green-200', 'hover:bg-green-200');
+
                             document.getElementById('vote-count-' + optionId).textContent = data.newVoteCount;
-                            
                         }
                     })
                     .catch(error => {
