@@ -1,4 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
+    btn_switching();
+});
+
+
+export const able = (voteButton) => {
+    voteButton.disabled = false;
+    voteButton.classList.remove('bg-green-200', 'hover:bg-green-200');
+    voteButton.classList.add('bg-green-500', 'hover:bg-green-600');
+};
+
+export const disabled = (voteButton) => {
+    voteButton.disabled = true;
+    voteButton.classList.remove('bg-green-500', 'hover:bg-green-600');
+    voteButton.classList.add('bg-green-200', 'hover:bg-green-200');
+};
+
+export const btn_switching = () => {
     const chkBtns = document.querySelectorAll('.switch_btn');
     let voteButton = document.querySelector('.vote-button');
     let hasVoted = voteButton.getAttribute('data-has-voted') === 'true';
@@ -40,17 +57,4 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             });
     }
-});
-
-
-const able = (voteButton) => {
-    voteButton.disabled = false;
-    voteButton.classList.remove('bg-green-200', 'hover:bg-green-200');
-    voteButton.classList.add('bg-green-500', 'hover:bg-green-600');
-};
-
-const disabled = (voteButton) => {
-    voteButton.disabled = true;
-    voteButton.classList.remove('bg-green-500', 'hover:bg-green-600');
-    voteButton.classList.add('bg-green-200', 'hover:bg-green-200');
 };

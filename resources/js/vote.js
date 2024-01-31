@@ -1,3 +1,5 @@
+import { btn_switching, able, disabled } from './btn_switching.js';
+
 document.addEventListener('DOMContentLoaded', function () {
     const voteButton = document.querySelector('.vote-button');
     const chkBtns = document.querySelectorAll('.switch_btn');
@@ -40,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             voteButton.classList.add('bg-green-200', 'hover:bg-green-200');
 
                             document.getElementById('vote-count-' + optionId).textContent = data.newVoteCount;
+                            btn_switching();
                         }
                     })
                     .catch(error => {

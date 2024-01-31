@@ -13,7 +13,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/add_options.js', 'resources/js/polling.js', 'resources/js/btn_switching', 'resources/js/checkbox.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/add_options.js', 'resources/js/vote.js', 'resources/js/btn_switching', 'resources/js/checkbox.js'])
 </head>
 
 <body class="font-sans antialiased">
