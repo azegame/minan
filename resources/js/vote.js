@@ -1,4 +1,4 @@
-import { btn_switching, able, disabled, savePreviousOptionId, saveCurrentOptionId} from './btn_switching.js';
+import { btn_switching, able, disabled, savePreviousOptionId} from './btn_switching.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const voteButton = document.querySelector('.vote-button');

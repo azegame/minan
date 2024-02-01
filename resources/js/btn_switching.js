@@ -20,25 +20,11 @@ export const savePreviousOptionId = (chkBtns) => {
     chkBtns.forEach(chkBtn => {
         // 現在投票している選択肢を保存
         if (chkBtn.checked) {
-            let previousOptionId = chkBtn.getAttribute('data-option-id').trim();
+            previousOptionId = chkBtn.getAttribute('data-option-id').trim();
             // console.log(previousOptionId);
         }
     });
     return previousOptionId;
-}
-
-export const saveCurrentOptionId = (chkBtns) => {
-    let currentOptionId = null;
-    chkBtns.forEach(chkBtn => {
-        chkBtn.addEventListener('change', () => {
-            // 今から投票しようとしている選択肢を保存
-            if (chkBtn.checked) {
-                currentOptionId = chkBtn.getAttribute('data-option-id').trim();
-                console.log(currentOptionId);
-            }
-        });
-    });
-    return currentOptionId;
 }
 
 export const btn_switching = () => {
@@ -46,17 +32,25 @@ export const btn_switching = () => {
     let voteButton = document.querySelector('.vote-button');
     let hasVoted = voteButton.getAttribute('data-has-voted') === 'true';
     let previousOptionId = null;
-    let currentOptionId = null;
 
     // 再投票の場合
     if (hasVoted) {
         previousOptionId = savePreviousOptionId(chkBtns);
-        currentOptionId = saveCurrentOptionId(chkBtns);
-        if (currentOptionId === previousOptionId) {
-            disabled(voteButton);
-        } else {
-            able(voteButton);
-        }
+        chkBtns.forEach(chkBtn => {
+            chkBtn.addEventListener('change', () => {
+                // 今から投票しようとしている選択肢を保存
+                if (chkBtn.checked) {
+                    let currentOptionId = chkBtn.getAttribute('data-option-id').trim();
+                    if (currentOptionId === previousOptionId) {
+                        disabled(voteButton);
+                    } else {
+                        able(voteButton);
+                    }
+                    console.log(currentOptionId);
+                }
+            });
+        });
+        
     // 未投票の場合
     } else {
         disabled(voteButton);
