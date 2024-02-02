@@ -21,7 +21,7 @@ export const savePreviousOptionId = (chkBtns) => {
         // 現在投票している選択肢を保存
         if (chkBtn.checked) {
             previousOptionId = chkBtn.getAttribute('data-option-id').trim();
-            console.log(previousOptionId);
+            // console.log(previousOptionId);
         }
     });
     return previousOptionId;

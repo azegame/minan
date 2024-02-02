@@ -64,4 +64,29 @@ class VoteController extends Controller
             }
         }
     }
+
+
+    public function revote(Request $request, $questionnaireId)
+    {
+        $previousOptionId = $request->input('previousOptionId');
+        Vote::where('questionnaire_id', $questionnaireId)
+            ->where('vote_user_id', auth()->id())
+            ->where('option_id', $previousOptionId)
+            ->delete();
+
+        $previousOption = Option::find($previousOptionId);
+        if ($previousOption) {
+            $previousOption->decrement('vote_count');
+        }
+
+        if (isset($previousOption)) {
+            $previousVoteCount = $previousOption->vote_count;
+        } else {
+            $previousVoteCount = null;
+        }
+
+        return response()->json([
+            'previousVoteCount' => $previousVoteCount,
+        ]);
+    }
 }
