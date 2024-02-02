@@ -12,29 +12,48 @@ use App\Models\Option;
 
 class VoteController extends Controller
 {
-    public function vote(Request $request, $questionnaireId, $optionId)
+    public function vote(Request $request, $questionnaireId)
     {
+        $currentOptionId = $request->input('currentOptionId');
+        $previousOptionId = $request->input('previousOptionId');
         try {
+            $hasVoted = Vote::where('questionnaire_id', $questionnaireId)
+                ->where('vote_user_id', auth()->id())
+                ->exists();
+            // 再投票時削除
+            if ($hasVoted) {
+                Vote::where('questionnaire_id', $questionnaireId)
+                    ->where('vote_user_id', auth()->id())
+                    ->where('option_id', $previousOptionId)
+                    ->delete();
+                $previousOption = Option::find($previousOptionId);
+                if ($previousOption) {
+                    $previousOption->decrement('vote_count');
+                }
+            }
+            // 投票
             Vote::create([
                 'questionnaire_id' => $questionnaireId,
                 'vote_user_id' => Auth::id(),
-                'option_id' => $optionId,
+                'option_id' => $currentOptionId,
             ]);
 
-            // 投票ロジック
-            $option = Option::find($optionId);
-            $option->increment('vote_count');
+            $currentOption = Option::find($currentOptionId);
+            $currentOption->increment('vote_count');
 
-            // $hasVoted = Vote::where('questionnaire_id', $questionnaireId)
-            //     ->where('vote_user_id', auth()->id())
-            //     ->exists();
+            if (isset($previousOption)) {
+                $previousVoteCount = $previousOption->vote_count;
+            } else {
+                $previousVoteCount = null;
+            }
 
             return response()->json([
-                'newVoteCount' => $option->vote_count,
+                'previousVoteCount' => $previousVoteCount,
+                'newVoteCount' => $currentOption->vote_count,
             ]);
         } catch (QueryException $e) {
             Log::info($e);
-            $option = Option::find($optionId);
+            $option = Option::find($currentOptionId);
             $vote_count = $option->vote_count;
 
             if ($e->errorInfo[1] == 1062) {

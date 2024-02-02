@@ -3,21 +3,33 @@ import { btn_switching, able, disabled, savePreviousOptionId} from './btn_switch
 document.addEventListener('DOMContentLoaded', function () {
     const voteButton = document.querySelector('.vote-button');
     const chkBtns = document.querySelectorAll('.switch_btn');
+    let hasVoted = voteButton.getAttribute('data-has-voted') === 'true';
+    let previousOptionId = null;
+
+    if (hasVoted) {
+        previousOptionId = savePreviousOptionId(chkBtns);
+    }
 
         voteButton.addEventListener('click', function() {
             chkBtns.forEach(chkBtn => {
                 if (chkBtn.checked) {
                     const questionnaireId = voteButton.getAttribute('data-questionnaire-id').trim();
-                    const optionId = chkBtn.getAttribute('data-option-id').trim();
+                    const currentOptionId = chkBtn.getAttribute('data-option-id').trim();
 
-                    fetch('/questionnaires/' + questionnaireId + '/' + optionId,{
+                    const bodyData = { 
+                        questionnaireId: questionnaireId, 
+                        currentOptionId: currentOptionId,
+                        previousOptionId: previousOptionId // ここで以前の選択肢IDを送信
+                    };
+
+                    fetch('/questionnaires/' + questionnaireId,{
                         method: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
                             'Content-Type': 'application/json',
                             'X-Requested-With': 'XMLHttpRequest'
                         },
-                        body: JSON.stringify({ questionnaireId: questionnaireId, optionId: optionId })
+                        body: JSON.stringify(bodyData)
                     })
                     .then(response => {
                         if (response.status === 401) { // 認証エラー
@@ -40,9 +52,14 @@ document.addEventListener('DOMContentLoaded', function () {
                             voteButton.disabled = true;
                             voteButton.classList.remove('bg-green-500', 'hover:bg-green-600');
                             voteButton.classList.add('bg-green-200', 'hover:bg-green-200');
-
-                            document.getElementById('vote-count-' + optionId).textContent = data.newVoteCount;
+                            
+                            document.getElementById('vote-count-' + currentOptionId).textContent = data.newVoteCount;
+                            if (previousOptionId) {
+                                document.getElementById('vote-count-' + previousOptionId).textContent = data.previousVoteCount;
+                            }
+                            
                             btn_switching();
+                            previousOptionId = currentOptionId;
                         }
                     })
                     .catch(error => {
