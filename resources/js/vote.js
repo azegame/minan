@@ -1,5 +1,5 @@
 import { btn_switching, able, disabled, savePreviousOptionId} from './btn_switching.js';
-
+aaaaaaa
 document.addEventListener('DOMContentLoaded', function () {
     const voteButton = document.querySelector('.vote-button');
     const chkBtns = document.querySelectorAll('.switch_btn');
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     voteButton.addEventListener('click', function() {
         chkBtns.forEach(chkBtn => {
             if (chkBtn.checked) {
-                const bodyData = mkBodyData(voteButton, chkBtn, previousOptionId);
+                const bodyData = makeBodyData(voteButton, chkBtn, previousOptionId);
                 fetch('/questionnaires/' + bodyData.questionnaireId,{
                     method: 'POST',
                     headers: {
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         return response.json()
                         .then(data => {
                             alert('同じ選択肢に投票できません！');
-                            return; 
+                            return;
                         });
                     } else {
                         return response.json();
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-const mkBodyData = (voteButton, chkBtn, previousOptionId) => {
+const makeBodyData = (voteButton, chkBtn, previousOptionId) => {
     const questionnaireId = voteButton.getAttribute('data-questionnaire-id').trim();
     const currentOptionId = chkBtn.getAttribute('data-option-id').trim();
 
