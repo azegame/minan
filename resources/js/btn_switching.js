@@ -30,7 +30,8 @@ export const savePreviousOptionId = (chkBtns) => {
 export const btn_switching = () => {
     const chkBtns = document.querySelectorAll('.switch_btn');
     let voteButton = document.querySelector('.vote_button');
-    let hasVoted = voteButton.getAttribute('data-has-voted') === 'true';
+    let hasVoted = document.getElementById('hasVoted').value;
+    // let hasVoted = voteButton.getAttribute('data-has-voted') === 'true';
     let previousOptionId = null;
 
     // 再投票の場合

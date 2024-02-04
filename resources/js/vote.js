@@ -1,4 +1,4 @@
-import { btn_switching, able, disabled, savePreviousOptionId} from './btn_switching.js';
+import { btn_switching, able, disabled, savePreviousOptionId } from './btn_switching.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const voteButton = document.querySelector('.vote_button');
@@ -7,34 +7,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (hasVoted) {
         previousOptionId = getCheckedOptionId();
-        console.log(previousOptionId);
+        // console.log(previousOptionId);
     }
 
-    voteButton.addEventListener('click', function() {
+    voteButton.addEventListener('click', function () {
         let optionId = getCheckedOptionId();
+        console.log(optionId);
         // チェック済みの時
         if (optionId > 0) {
-                const option = getCheckedOptionById(optionId);
-                const bodyData = makeBodyData(voteButton, option, previousOptionId);
-                fetch('/questionnaires/' + bodyData.questionnaireId,{
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                        'Content-Type': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    body: JSON.stringify(bodyData)
-                })
+            const option = getCheckedOptionById(optionId);
+            const bodyData = makeBodyData(voteButton, option, previousOptionId);
+            fetch('/questionnaires/' + bodyData.questionnaireId, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify(bodyData)
+            })
                 .then(response => {
                     if (response.status === 401) { // 認証エラー
                         window.location.href = '/login';
                         return;
                     } else if (response.status === 409) { // 重複エラー
                         return response.json()
-                        .then(data => {
-                            alert('同じ選択肢に投票できません！');
-                            return;
-                        });
+                            .then(data => {
+                                alert('同じ選択肢に投票できません！');
+                                return;
+                            });
                     } else {
                         return response.json();
                     }
@@ -47,33 +48,34 @@ document.addEventListener('DOMContentLoaded', function () {
                 .catch(error => {
                     console.error('エラーが発生しました:', error);
                 });
-            } else {
-                const questionnaireId = voteButton.value;
-                let currentOptionId = null;
-                const bodyData = {
-                    questionnaireId: questionnaireId,
-                    currentOptionId: currentOptionId,
-                    previousOptionId: previousOptionId
-                };
-                fetch('/questionnaires/' + bodyData.questionnaireId,{
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                        'Content-Type': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    body: JSON.stringify(bodyData)
-                })
+        } else {
+            let currentOptionId = null;
+            console.log(previousOptionId);
+            const questionnaireId = voteButton.value;
+            const bodyData = {
+                questionnaireId: questionnaireId,
+                currentOptionId: currentOptionId,
+                previousOptionId: previousOptionId
+            };
+            fetch('/questionnaires/' + bodyData.questionnaireId, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify(bodyData)
+            })
                 .then(response => {
                     if (response.status === 401) { // 認証エラー
                         window.location.href = '/login';
                         return;
                     } else if (response.status === 409) { // 重複エラー
                         return response.json()
-                        .then(data => {
-                            alert('同じ選択肢に投票できません！');
-                            return;
-                        });
+                            .then(data => {
+                                alert('同じ選択肢に投票できません！');
+                                return;
+                            });
                     } else {
                         return response.json();
                     }
@@ -86,9 +88,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 .catch(error => {
                     console.error('エラーが発生しました:', error);
                 });
-            }
-        });
+        }
     });
+});
 
 
 
@@ -107,16 +109,16 @@ const makeBodyData = (voteButton, option, previousOptionId) => {
 
 const changeBtnAndVoteCount = (data, voteButton, previousOptionId, currentOptionId) => {
     if (data) {
-        voteButton.setAttribute('data-has-voted', 'true');
+        // voteButton.setAttribute('data-has-voted', 'true');
         voteButton.textContent = '再投票'
         voteButton.disabled = true;
         voteButton.classList.remove('bg-green-500', 'hover:bg-green-600');
         voteButton.classList.add('bg-green-200', 'hover:bg-green-200');
-        
-        if (currentOptionId != null){
+
+        if (currentOptionId != null) {
             document.getElementById('vote-count-' + currentOptionId).textContent = data.newVoteCount;
         }
-        
+
         if (previousOptionId != null) {
             document.getElementById('vote-count-' + previousOptionId).textContent = data.previousVoteCount;
         }
@@ -138,8 +140,8 @@ const getCheckedOptionId = () => {
     // };
     return -1;
 }
-        
-        
+
+
 
 
 const getCheckedOptionById = (id) => {
