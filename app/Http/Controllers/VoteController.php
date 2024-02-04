@@ -66,7 +66,7 @@ class VoteController extends Controller
     }
 
 
-    public function revote(Request $request, $questionnaireId)
+    public function revoke(Request $request, $questionnaireId)
     {
         $previousOptionId = $request->input('previousOptionId');
         Vote::where('questionnaire_id', $questionnaireId)

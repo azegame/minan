@@ -25,7 +25,7 @@ Route::get('/questionnaires/create', [QuestionnaireController::class, 'create'])
 //Route::get('/questionnaires/{id}', [QuestionnaireController::class, 'show'])->name('questionnaires.show');
 Route::get('/questionnaires/{questionnaireId}', [QuestionnaireController::class, 'show'])->where('id', '[0-9]+')->name('questionnaires.show');
 Route::post('/questionnaires/{questionnaireId}', [VoteController::class, 'vote'])->middleware('ajax.auth')->where('questionnaireId', '[0-9]+')->name('questionnaires.vote');
-Route::delete('/questionnaires/{questionnaireId}', [VoteController::class, 'revote'])->middleware('ajax.auth')->where('questionnaireId', '[0-9]+')->name('questionnaires.revote');
+Route::delete('/questionnaires/{questionnaireId}', [VoteController::class, 'revoke'])->middleware('ajax.auth')->where('questionnaireId', '[0-9]+')->name('questionnaires.revote');
 Route::post('/questionnaires', [QuestionnaireController::class, 'store'])->middleware(['auth', 'verified'])->name('questionnaires.store');
 
 
