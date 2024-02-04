@@ -18,9 +18,9 @@
                     <div class="flex justify-center items-center">
                         <label class="flex items-center space-x-3">
                             @if ($option->id == $selectedOptionId)
-                            <input type="checkbox" checked data-option-id=" {{ $option->id }} " class="switch_btn h-5 w-5 text-blue-600 rounded-full">
+                            <input type="checkbox" id="option-{{ $option->id }}" checked value="{{ $option->id }}" class="switch_btn h-5 w-5 text-blue-600 rounded-full">
                             @else
-                            <input type="checkbox" data-option-id=" {{ $option->id }}" class="switch_btn h-5 w-5 text-blue-600 rounded-full">
+                            <input type="checkbox" id="option-{{ $option->id }}" value="{{ $option->id }}" class="switch_btn h-5 w-5 text-blue-600 rounded-full">
                             @endif
                             <span>選択</span>
                         </label>
@@ -37,10 +37,11 @@
                 <a href="{{ route('index') }}" class="flex-1 text-center text-white bg-gray-600 border-0 py-4 px-5 mr-2 focus:outline-none hover:bg-gray-700 rounded-lg">投票を終了</a>
 
                 <!-- 投票ボタン -->
+                <input type="hidden" id="hasVoted" value="{{ $hasVoted }}">
                 @if ($hasVoted)
-                <button data-questionnaire-id=" {{ $questionnaire->id }}" data-has-voted="true" class="vote-button flex-1 text-white bg-green-200 border-0 py-4 px-5 ml-2 focus:outline-none hover:bg-green-200 rounded-lg" disabled>再投票</button>
+                <button value="{{ $questionnaire->id }}" class="vote_button flex-1 text-white bg-green-200 border-0 py-4 px-5 ml-2 focus:outline-none hover:bg-green-200 rounded-lg" disabled>再投票</button>
                 @else
-                <button data-questionnaire-id=" {{ $questionnaire->id }}" data-has-voted="false" class="vote-button flex-1 text-white bg-green-500 border-0 py-4 px-5 ml-2 focus:outline-none hover:bg-green-600 rounded-lg">投票</button>
+                <button value="{{ $questionnaire->id }}" class="vote_button flex-1 text-white bg-green-500 border-0 py-4 px-5 ml-2 focus:outline-none hover:bg-green-600 rounded-lg">投票</button>
                 @endif
             </div>
         </div>

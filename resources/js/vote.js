@@ -1,19 +1,21 @@
 import { btn_switching, able, disabled, savePreviousOptionId} from './btn_switching.js';
-aaaaaaa
+
 document.addEventListener('DOMContentLoaded', function () {
-    const voteButton = document.querySelector('.vote-button');
-    const chkBtns = document.querySelectorAll('.switch_btn');
-    let hasVoted = voteButton.getAttribute('data-has-voted') === 'true';
+    const voteButton = document.querySelector('.vote_button');
+    let hasVoted = document.getElementById('hasVoted').value;
     let previousOptionId = null;
 
     if (hasVoted) {
-        previousOptionId = savePreviousOptionId(chkBtns);
+        previousOptionId = getCheckedOptionId();
+        console.log(previousOptionId);
     }
 
     voteButton.addEventListener('click', function() {
-        chkBtns.forEach(chkBtn => {
-            if (chkBtn.checked) {
-                const bodyData = makeBodyData(voteButton, chkBtn, previousOptionId);
+        let optionId = getCheckedOptionId();
+        // チェック済みの時
+        if (optionId > 0) {
+                const option = getCheckedOptionById(optionId);
+                const bodyData = makeBodyData(voteButton, option, previousOptionId);
                 fetch('/questionnaires/' + bodyData.questionnaireId,{
                     method: 'POST',
                     headers: {
@@ -46,14 +48,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.error('エラーが発生しました:', error);
                 });
             } else {
-                const questionnaireId = voteButton.getAttribute('data-questionnaire-id').trim();
-                const currentOptionId = null;
+                const questionnaireId = voteButton.value;
+                let currentOptionId = null;
                 const bodyData = {
                     questionnaireId: questionnaireId,
                     currentOptionId: currentOptionId,
                     previousOptionId: previousOptionId
                 };
-                // console.log(previousOptionId);
                 fetch('/questionnaires/' + bodyData.questionnaireId,{
                     method: 'DELETE',
                     headers: {
@@ -78,11 +79,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 })
                 .then(data => {
-                    console.log(bodyData.currentOptionId);
                     changeBtnAndVoteCount(data, voteButton, previousOptionId, bodyData.currentOptionId);
                     btn_switching();
                     previousOptionId = bodyData.currentOptionId;
-                    console.log(previousOptionId);
                 })
                 .catch(error => {
                     console.error('エラーが発生しました:', error);
@@ -90,18 +89,19 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-});
 
 
-const makeBodyData = (voteButton, chkBtn, previousOptionId) => {
-    const questionnaireId = voteButton.getAttribute('data-questionnaire-id').trim();
-    const currentOptionId = chkBtn.getAttribute('data-option-id').trim();
+
+const makeBodyData = (voteButton, option, previousOptionId) => {
+    const questionnaireId = voteButton.value;
+    const currentOptionId = option.value;
 
     const bodyData = {
         questionnaireId: questionnaireId,
         currentOptionId: currentOptionId,
         previousOptionId: previousOptionId
     };
+    console.log(bodyData);
     return bodyData;
 }
 
@@ -122,3 +122,58 @@ const changeBtnAndVoteCount = (data, voteButton, previousOptionId, currentOption
         }
     }
 }
+
+const getCheckedOptionId = () => {
+    // const options = document.querySelectorAll('.switch_btn');
+    const options = document.getElementsByClassName('switch_btn');
+    for (let option of options) {
+        if (option.checked) {
+            return option.value;
+        }
+    }
+    // for (let i = 0; i < options.length; i++) {
+    //     if (options[i].checked) {
+    //         return options[i].value;
+    //     }
+    // };
+    return -1;
+}
+        
+        
+
+
+const getCheckedOptionById = (id) => {
+    const options = document.querySelectorAll('.switch_btn');
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].value == id) {
+            return options[i];
+        }
+    };
+    return null;
+}
+
+
+const getCheckedOptionById2 = (id) => {
+    return document.getElementById(`option-${id}`);
+    // const options = document.querySelectorAll('.switch_btn');
+    // options.forEach(option => {
+    //     if (option.value == id) {
+    //         return option;
+    //     }
+    // });
+    // return null;
+}
+
+
+const getCheckedOption = () => {
+    return getCheckedOptionById(getCheckedOptionId());
+    // const options = document.querySelectorAll('.switch_btn');
+    // options.forEach(option => {
+    //     if (option.checked) {
+    //         return option;
+    //     }
+    // });
+    // return null;
+}
+
+

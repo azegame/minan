@@ -20,7 +20,7 @@ export const savePreviousOptionId = (chkBtns) => {
     chkBtns.forEach(chkBtn => {
         // 現在投票している選択肢を保存
         if (chkBtn.checked) {
-            previousOptionId = chkBtn.getAttribute('data-option-id').trim();
+            previousOptionId = chkBtn.value;
             // console.log(previousOptionId);
         }
     });
@@ -29,7 +29,7 @@ export const savePreviousOptionId = (chkBtns) => {
 
 export const btn_switching = () => {
     const chkBtns = document.querySelectorAll('.switch_btn');
-    let voteButton = document.querySelector('.vote-button');
+    let voteButton = document.querySelector('.vote_button');
     let hasVoted = voteButton.getAttribute('data-has-voted') === 'true';
     let previousOptionId = null;
 
@@ -40,7 +40,7 @@ export const btn_switching = () => {
             chkBtn.addEventListener('change', () => {
                 // 今から投票しようとしている選択肢を保存
                 if (chkBtn.checked) {
-                    let currentOptionId = chkBtn.getAttribute('data-option-id').trim();
+                    let currentOptionId = chkBtn.value;
                     if (currentOptionId === previousOptionId) {
                         disabled(voteButton);
                     } else {
