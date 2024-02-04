@@ -70,4 +70,20 @@ class QuestionnaireController extends Controller
 
         return view('questionnaires.show', compact('questionnaire', 'options', 'hasVoted', 'selectedOptionId'));
     }
+
+    public function minePage()
+    {
+        $userId = Auth::id();
+        $questionnaires = Questionnaire::where('user_id', $userId)->get();
+        return view('questionnaires.mine', ['questionnaires' => $questionnaires]);
+    }
+
+    public function destroy($id)
+    {
+        Questionnaire::find($id)->delete();
+        Option::find($id)->delete();
+        Vote::find($id)->delete();
+
+        return to_route('index');
+    }
 }
