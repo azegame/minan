@@ -28,8 +28,10 @@ document.addEventListener('DOMContentLoaded', function () {
             })
                 .then(response => {
                     if (response.status === 401) { // 認証エラー
-                        window.location.href = '/login';
-                        return;
+                        const userConfirmed = window.confirm('ログインする必要があります。ログインしますか？');
+                        if (userConfirmed) {
+                            window.location.href = '/login';
+                        }
                     } else if (response.status === 409) { // 重複エラー
                         return response.json()
                             .then(data => {
@@ -68,7 +70,10 @@ document.addEventListener('DOMContentLoaded', function () {
             })
                 .then(response => {
                     if (response.status === 401) { // 認証エラー
-                        window.location.href = '/login';
+                        const userConfirmed = window.confirm('ログインする必要があります。ログインしますか？');
+                        if (userConfirmed) {
+                            window.location.href = '/login';
+                        }
                         return;
                     } else if (response.status === 409) { // 重複エラー
                         return response.json()

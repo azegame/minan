@@ -26,6 +26,6 @@ class AjaxAuthentication
             return response()->json(['error' => '認証してね.'], 401);
         }
         Log::info('HTML');
-        return redirect()->guest('login');
+        // return redirect()->guest('login');
     }
 }
