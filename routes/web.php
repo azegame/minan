@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [QuestionnaireController::class, 'index'])->name('index');
 Route::get('/questionnaires/mine', [QuestionnaireController::class, 'minePage'])->middleware('ajax.auth')->where('questionnaireId', '[0-9]+')->name('questionnaires.mine');
-Route::delete('/questionnaires/mine/{questionnaireId}', [QuestionnaireController::class, 'destroy'])->middleware('ajax.auth')->where('questionnaireId', '[0-9]+')->name('questionnaires.mine.destroy');
+Route::post('/questionnaires/mine/{questionnaireId}', [QuestionnaireController::class, 'destroy'])->middleware('ajax.auth')->where('questionnaireId', '[0-9]+')->name('questionnaires.mine.destroy');
 // Route::get('/questionnaires/mine/{questionnaireId}', [QuestionnaireController::class, 'minePage'])->middleware('ajax.auth')->where('questionnaireId', '[0-9]+')->name('questionnaires.mine');
 
 Route::get('/questionnaires/create', [QuestionnaireController::class, 'create'])->middleware(['auth', 'verified'])->name('questionnaires.create');

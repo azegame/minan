@@ -8,6 +8,7 @@ use App\Models\Questionnaire;
 use App\Models\Option;
 use App\Models\Vote;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class QuestionnaireController extends Controller
 {
@@ -80,9 +81,15 @@ class QuestionnaireController extends Controller
 
     public function destroy($id)
     {
-        Questionnaire::find($id)->delete();
-        Option::find($id)->delete();
-        Vote::find($id)->delete();
+        $votes = Vote::where('questionnaire_id', $id)->get();
+        if ($votes) {
+            Vote::where('questionnaire_id', $id)->delete();
+        } else {
+            Log::info('削除対象のvotesのデータが見つからなかった');
+        }
+
+        Option::where('questionnaire_id', $id)->delete();
+        Questionnaire::where('id', $id)->delete();
 
         return to_route('index');
     }
