@@ -75,7 +75,7 @@ class QuestionnaireController extends Controller
     {
         $userId = Auth::id();
         $questionnaires = Questionnaire::where('user_id', $userId)->get();
-        return view('questionnaires.mine', ['questionnaires' => $questionnaires]);
+        return view('questionnaires.mine', compact('questionnaires'));
     }
 
     public function destroy($id)

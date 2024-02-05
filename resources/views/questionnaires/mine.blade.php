@@ -17,6 +17,9 @@
                         <h3 class="tracking-widest text-blue-500 text-xs font-medium title-font">
                             <a href="{{ route('questionnaires.show', $questionnaire->id) }}">投票する</a>
                         </h3>
+                        <h3 class="tracking-widest text-blue-500 text-xs font-medium title-font">
+                            <a href="{{ route('questionnaires.mine.destroy', $questionnaire->id) }}">アンケートを削除する</a>
+                        </h3>
                         <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{ $questionnaire->questionnaire_name}}</h2>
                     </div>
                 </div>
