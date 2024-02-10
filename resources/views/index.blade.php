@@ -4,7 +4,9 @@
             みんなのアンケート
         </h2>
     </x-slot>
-
+    <div class="relative inline-flex">
+        <a href="{{ route('questionnaires.create') }}" class="flex mx-auto text-white bg-teal-300 border-0 py-2 px-4 mb-4 focus:outline-none hover:bg-teal-400 rounded text-lg w-1/2">あああ</a>
+    </div>
     <section class="text-gray-600 body-font">
         <div class="container px-5 py-24 mx-auto">
 

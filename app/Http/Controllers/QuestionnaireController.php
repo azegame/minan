@@ -14,7 +14,9 @@ class QuestionnaireController extends Controller
 {
     public function index()
     {
-        $questionnaires = Questionnaire::select('id', 'questionnaire_name')->where('public_flag', 1)->get();
+        // $questionnaires = Questionnaire::select('id', 'questionnaire_name')->where('public_flag', 1)->get();
+        $questionnaires = Questionnaire::where('public_flag', 1)->orderBy('created_at', 'desc')->get();
+        // $voteCount = Option::select('vote_count')->where('questionnaire_id', $questionnaires->id)->sum();
         return view('index', compact('questionnaires'));
     }
 
