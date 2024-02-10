@@ -5,7 +5,8 @@
         </h2>
     </x-slot>
     <div class="relative inline-flex">
-        <a href="{{ route('questionnaires.create') }}" class="flex mx-auto text-white bg-teal-300 border-0 py-2 px-4 mb-4 focus:outline-none hover:bg-teal-400 rounded text-lg w-1/2">あああ</a>
+        <a href="{{ route('index', ['sort' => 'created_at']) }}" class="flex mx-auto text-white bg-teal-300 border-0 py-2 px-4 mb-4 focus:outline-none hover:bg-teal-400 rounded text-lg w-1/2">作成日</a>
+        <!-- <a href="{ route('index', , ['sort' => 'votes']) }" class="flex mx-auto text-white bg-teal-300 border-0 py-2 px-4 mb-4 focus:outline-none hover:bg-teal-400 rounded text-lg w-1/2">投票数</a> -->
     </div>
     <section class="text-gray-600 body-font">
         <div class="container px-5 py-24 mx-auto">

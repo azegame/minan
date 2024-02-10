@@ -12,11 +12,20 @@ use Illuminate\Support\Facades\Log;
 
 class QuestionnaireController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // $questionnaires = Questionnaire::select('id', 'questionnaire_name')->where('public_flag', 1)->get();
-        $questionnaires = Questionnaire::where('public_flag', 1)->orderBy('created_at', 'desc')->get();
+
+
         // $voteCount = Option::select('vote_count')->where('questionnaire_id', $questionnaires->id)->sum();
+        $sort = $request->query('sort', 'default_value');
+        if ($sort == 'created_at') {
+            $questionnaires = Questionnaire::where('public_flag', 1)->orderBy('created_at', 'desc')->get();
+        } elseif ($sort == 'votes') {
+        } else {
+            $questionnaires = Questionnaire::where('public_flag', 1)->orderBy('created_at', 'asc')->get();
+        }
+
+        // return view('index', ['items' => $items]);
         return view('index', compact('questionnaires'));
     }
 
