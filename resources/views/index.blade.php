@@ -25,7 +25,10 @@
                         <h3 class="tracking-widest text-blue-500 text-xs font-medium title-font">
                             <a href="{{ route('questionnaires.show', $questionnaire->id) }}">投票する</a>
                         </h3>
-                        <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{ $questionnaire->questionnaire_name}}</h2>
+                        <h2 class="text-lg text-gray-900 font-medium title-font mb-4">{{ $questionnaire->questionnaire_name }}</h2>
+                        <h2 class="text-sm text-gray-900 font-medium ">投票された数：{{ $voteCounts[$questionnaire->id] ?? '？'  }}</h2>
+                        <h2 class="text-sm text-gray-900 font-medium ">作成日：{{ $questionnaire->created_at }}</h2>
+
                     </div>
                 </div>
                 @endforeach

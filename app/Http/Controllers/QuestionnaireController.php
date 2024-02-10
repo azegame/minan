@@ -14,10 +14,7 @@ class QuestionnaireController extends Controller
 {
     public function index(Request $request)
     {
-
-
-        // $voteCount = Option::select('vote_count')->where('questionnaire_id', $questionnaires->id)->sum();
-        $sort = $request->query('sort', 'default_value');
+        $sort = $request->query('sort');
         if ($sort == 'created_at') {
             $questionnaires = Questionnaire::where('public_flag', 1)->orderBy('created_at', 'desc')->get();
         } elseif ($sort == 'votes') {
@@ -25,8 +22,13 @@ class QuestionnaireController extends Controller
             $questionnaires = Questionnaire::where('public_flag', 1)->orderBy('created_at', 'asc')->get();
         }
 
+        $voteCounts = [];
+        foreach ($questionnaires as $questionnaire) {
+            $voteCounts[$questionnaire->id] = Option::where('questionnaire_id', $questionnaire->id)->sum('vote_count');
+        }
+
         // return view('index', ['items' => $items]);
-        return view('index', compact('questionnaires'));
+        return view('index', compact('questionnaires', 'voteCounts'));
     }
 
 
