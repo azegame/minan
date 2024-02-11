@@ -20,4 +20,9 @@ class Questionnaire extends Model
     {
         return $this->hasMany(Option::class, 'questionnaire_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

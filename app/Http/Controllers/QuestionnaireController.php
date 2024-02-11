@@ -15,7 +15,7 @@ class QuestionnaireController extends Controller
 {
     public function index(Request $request)
     {
-        $user = User::where('id', Auth::id())->first();
+        // $users = User::where('id', Auth::id())->get();
         $questionnaires = Questionnaire::where('public_flag', 1)->orderBy('created_at', 'asc')->get();
 
         $sort = $request->query('sort');
@@ -34,7 +34,7 @@ class QuestionnaireController extends Controller
         foreach ($questionnaires as $questionnaire) {
             $voteCounts[$questionnaire->id] = Option::where('questionnaire_id', $questionnaire->id)->sum('vote_count');
         }
-        return view('index', compact('questionnaires', 'voteCounts', 'user'));
+        return view('index', compact('questionnaires', 'voteCounts'));
     }
 
 
