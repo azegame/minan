@@ -93,7 +93,11 @@ class QuestionnaireController extends Controller
     {
         $userId = Auth::id();
         $questionnaires = Questionnaire::where('user_id', $userId)->get();
-        return view('questionnaires.mine', compact('questionnaires'));
+        $voteCounts = [];
+        foreach ($questionnaires as $questionnaire) {
+            $voteCounts[$questionnaire->id] = Option::where('questionnaire_id', $questionnaire->id)->sum('vote_count');
+        }
+        return view('questionnaires.mine', compact('questionnaires', 'voteCounts'));
     }
 
     public function destroy($id)
