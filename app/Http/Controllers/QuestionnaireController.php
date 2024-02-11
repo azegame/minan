@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\User;
 use App\Models\Questionnaire;
 use App\Models\Option;
 use App\Models\Vote;
@@ -14,10 +15,17 @@ class QuestionnaireController extends Controller
 {
     public function index(Request $request)
     {
+        $user = User::where('id', Auth::id())->first();
+        $questionnaires = Questionnaire::where('public_flag', 1)->orderBy('created_at', 'asc')->get();
+
         $sort = $request->query('sort');
         if ($sort == 'created_at') {
             $questionnaires = Questionnaire::where('public_flag', 1)->orderBy('created_at', 'desc')->get();
-        } elseif ($sort == 'votes') {
+        } elseif ($sort == 'vote_counts') {
+            $voteCounts = [];
+            foreach ($questionnaires as $questionnaire) {
+                $voteCounts[$questionnaire->id] = Option::where('questionnaire_id', $questionnaire->id)->sum('vote_count');
+            }
         } else {
             $questionnaires = Questionnaire::where('public_flag', 1)->orderBy('created_at', 'asc')->get();
         }
@@ -26,9 +34,7 @@ class QuestionnaireController extends Controller
         foreach ($questionnaires as $questionnaire) {
             $voteCounts[$questionnaire->id] = Option::where('questionnaire_id', $questionnaire->id)->sum('vote_count');
         }
-
-        // return view('index', ['items' => $items]);
-        return view('index', compact('questionnaires', 'voteCounts'));
+        return view('index', compact('questionnaires', 'voteCounts', 'user'));
     }
 
 
@@ -52,13 +58,11 @@ class QuestionnaireController extends Controller
 
         $optionNames = $request->input('option_name');
         foreach ($optionNames as $optionName) {
-            // 選択肢をデータベースに保存
             Option::create([
                 'questionnaire_id' => $questionnaireId,
                 'option_name' => $optionName,
             ]);
         }
-        //dd($optionNames);
 
         return to_route('index');
     }
