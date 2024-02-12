@@ -15,12 +15,12 @@ class QuestionnaireController extends Controller
 {
     public function index(Request $request)
     {
-        // $users = User::where('id', Auth::id())->get();
-        // $questionnaires = Questionnaire::where('public_flag', 1)->orderBy('created_at', 'asc')->get();
+        $questionnaires = Questionnaire::where('public_flag', 1)->orderBy('created_at', 'asc')->get();
         $questionnairesQuery = Questionnaire::where('public_flag', 1);
         $searchQuery = $request->query('search');
 
         if ($searchQuery) {
+            // $questionnaires = Questionnaire::where('questionnaire_name', 'like', '%' . $searchQuery . '%')->get();
             $questionnairesQuery = $questionnairesQuery->where('questionnaire_name', 'like', '%' . $searchQuery . '%');
         }
 
@@ -29,10 +29,10 @@ class QuestionnaireController extends Controller
             // $questionnaires = Questionnaire::where('public_flag', 1)->orderBy('created_at', 'desc')->get();
             $questionnairesQuery = $questionnairesQuery->orderBy('created_at', 'desc');
         } elseif ($sort == 'vote_counts') {
-            // $voteCounts = [];
-            // foreach ($questionnaires as $questionnaire) {
-            //     $voteCounts[$questionnaire->id] = Option::where('questionnaire_id', $questionnaire->id)->sum('vote_count');
-            // }
+            $voteCounts = [];
+            foreach ($questionnaires as $questionnaire) {
+                $voteCounts[$questionnaire->id] = Option::where('questionnaire_id', $questionnaire->id)->sum('vote_count');
+            }
         } else {
             // $questionnaires = Questionnaire::where('public_flag', 1)->orderBy('created_at', 'asc')->get();
             $questionnairesQuery = $questionnairesQuery->orderBy('created_at', 'asc');
